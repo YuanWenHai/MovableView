@@ -3,10 +3,8 @@ A movable view with removed callback.
 
 ![image](https://github.com/YuanWenHai/MovableView/blob/master/example/screenshot/anim.gif)
 
-在view移出屏幕后回调onRemove方法.
 
-
-## 使用：
+## USAGE：
 ```java
 ((RemovableView) view).setOnRemoveCallback(new RemovableView.OnRemoveCallback() {
                 @Override
@@ -16,7 +14,6 @@ A movable view with removed callback.
                 }
             });
  ```
-## 修改自动移除因子：
  ```java
   ((RemovableView) view).setAutoRemoveMultiplier(0.3f);//移出屏幕超过30%松开后自动移除
   ```
