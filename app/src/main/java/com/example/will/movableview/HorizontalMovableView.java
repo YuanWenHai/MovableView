@@ -11,28 +11,25 @@ import android.widget.Scroller;
  * Created by will on 2016/10/18.
  */
 
-public class MovableView extends FrameLayout {
+public class HorizontalMovableView extends FrameLayout {
 
-    private int lastX,lastY;
+    private int lastX;
 
-
-    private int movedX,movedY;
-
-    public static final int HORIZONTAL = 0,VERTICAL = 1;
+    private int movedX;
 
     private int touchSlop;
 
     private boolean moved;
 
-    private int mOrientation = HORIZONTAL;
 
     private float autoRemoveMultiplier = 0.5f;
 
     private ContentRemoveCallback mRemoveCallback;
 
     private boolean removed;
+
     private Scroller mScroller;
-    public MovableView(Context context, AttributeSet attr){
+    public HorizontalMovableView(Context context, AttributeSet attr){
         super(context,attr);
         mScroller = new Scroller(context);
         touchSlop = ViewConfiguration.get(context).getScaledTouchSlop();
@@ -48,20 +45,13 @@ public class MovableView extends FrameLayout {
                 break;
             case MotionEvent.ACTION_MOVE:
                 if(!removed){
-                    if(mOrientation == HORIZONTAL){
-                        movedX += (int)event.getX() - lastX;
-                        if(Math.abs(movedX) > touchSlop){
-                            scrollTo(-movedX,-movedY);
-                            requestDisallowInterceptTouchEvent(true);
-                            moved = true;
-                        }
-                    }else{
-                        movedY += (int) event.getY() - lastY;
-                        if(Math.abs(movedY) > touchSlop){
-                            scrollTo(-movedX,-movedY);
-                            requestDisallowInterceptTouchEvent(true);
-                            moved = true;
-                        }
+                    movedX += (int)event.getX() - lastX;
+                    if(moved){
+                        scrollTo(-movedX,0);
+                    }else if (Math.abs(movedX) > touchSlop ){
+                        scrollTo(-movedX,0);
+                        requestDisallowInterceptTouchEvent(true);
+                        moved = true;
                     }
                 }
                 break;
@@ -73,11 +63,10 @@ public class MovableView extends FrameLayout {
                 }else{
                     performMovement();
                 }
+                moved = false;
                 movedX = 0;
-                movedY = 0;
         }
         lastX = (int)event.getX();
-        lastY = (int) event.getY();
         return true;
     }
     private void smoothScroll(int desX,int desY){
@@ -96,32 +85,25 @@ public class MovableView extends FrameLayout {
             postInvalidate();
         }else if(removed && mRemoveCallback != null){
             mRemoveCallback.onRemove();
+            removed = false;
+            scrollTo(0,0);
         }
     }
 
-    @Override
-    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-        super.onLayout(changed, left, top, right, bottom);
-    }
-    public void setScrollOrientation(int orientation){
-        if(orientation > 1 || orientation < 0){
-            mOrientation = HORIZONTAL;
-        }else{
-            mOrientation = orientation;
-        }
-    }
+
     private void performMovement(){
-        if(mOrientation == HORIZONTAL){
-            if(movedX > getWidth()*autoRemoveMultiplier) {
-                smoothScroll(-getWidth(), 0);
-                removed = true;
-            }else if(movedX < -getWidth()*autoRemoveMultiplier ){
-                smoothScroll(getWidth(),0);
-                removed = true;
-            }else{
-                smoothScroll(0,0);
-            }
+        if(movedX > getWidth()*autoRemoveMultiplier) {
+            smoothScroll(-getWidth(), 0);
+            removed = true;
+        }else if(movedX < -getWidth()*autoRemoveMultiplier ){
+            smoothScroll(getWidth(),0);
+            removed = true;
+        }else{
+            smoothScroll(0,0);
         }
+    }
+    public void setAutoRemoveMultiplier(float f){
+        autoRemoveMultiplier = f;
     }
     public void setOnRemoveCallback(ContentRemoveCallback callback){
         mRemoveCallback = callback;
