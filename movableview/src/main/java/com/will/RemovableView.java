@@ -153,9 +153,6 @@ public class RemovableView extends LinearLayout {
     public interface OnRemoveCallback {
         void onRemove(View removedView);
     }
-    public interface OnClickListener{
-        void onClick(View view);
-    }
     public void setOnRemoveCallback(OnRemoveCallback callback){
         mRemoveCallback = callback;
     }

@@ -1,7 +1,7 @@
 package com.example.will.movableview;
 
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.will.RemovableView;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Created by Will on 2016/10/18.
@@ -30,7 +31,8 @@ public class SimpleAdapter extends RecyclerView.Adapter<SimpleAdapter.ViewHolder
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.text.setText(list.get(position));
-        //animateView(holder.itemView,position);
+        holder.text.setBackgroundColor(Color.rgb(getRandomNumber(),getRandomNumber(),getRandomNumber()));
+        animateView(holder.itemView,position);
     }
 
     @Override
@@ -50,16 +52,16 @@ public class SimpleAdapter extends RecyclerView.Adapter<SimpleAdapter.ViewHolder
             ((RemovableView) view).setOnRemoveCallback(new RemovableView.OnRemoveCallback() {
                 @Override
                 public void onRemove(View view) {
+                    Toast.makeText(mRecyclerView.getContext(), "you removed "+list.get(getAdapterPosition()), Toast.LENGTH_SHORT).show();
                     list.remove(getAdapterPosition());
                     lastAnimatedIndex = getAdapterPosition()-1;
                     notifyDataSetChanged();
-                    Log.e("onRemove","execute");
                 }
             });
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(mRecyclerView.getContext(),"you clicked"+list.get(getAdapterPosition()),Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mRecyclerView.getContext(),"you clicked "+list.get(getAdapterPosition()),Toast.LENGTH_SHORT).show();
                 }
             });
             text = (TextView) view.findViewById(R.id.text);
@@ -85,5 +87,8 @@ public class SimpleAdapter extends RecyclerView.Adapter<SimpleAdapter.ViewHolder
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
         mRecyclerView = recyclerView;
+    }
+    private int getRandomNumber(){
+        return  new Random().nextInt(99-10)+10;
     }
 }
