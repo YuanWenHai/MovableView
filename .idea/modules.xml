@@ -4,7 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/MovableView.iml" filepath="$PROJECT_DIR$/MovableView.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/horizontalremovableitemview/horizontalremovableitemview.iml" filepath="$PROJECT_DIR$/horizontalremovableitemview/horizontalremovableitemview.iml" />
+      <module fileurl="file://$PROJECT_DIR$/movableview/movableview.iml" filepath="$PROJECT_DIR$/movableview/movableview.iml" />
     </modules>
   </component>
 </project>

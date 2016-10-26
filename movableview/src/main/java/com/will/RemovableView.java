@@ -1,4 +1,4 @@
-package com.example.will.movableview;
+package com.will;
 
 import android.content.Context;
 import android.support.v4.widget.ViewDragHelper;

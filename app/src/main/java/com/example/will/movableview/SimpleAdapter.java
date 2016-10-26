@@ -9,6 +9,8 @@ import android.view.animation.TranslateAnimation;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.will.RemovableView;
+
 import java.util.ArrayList;
 
 /**
