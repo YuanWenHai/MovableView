@@ -4,7 +4,7 @@ A movable view with removed callback.
 ![image](https://github.com/YuanWenHai/MovableView/blob/master/example/screenshot/anim.gif)
 
 
-## USAGE：
+## Usage：
 ```java
 ((RemovableView) view).setOnRemoveCallback(new RemovableView.OnRemoveCallback() {
                 @Override
@@ -15,5 +15,5 @@ A movable view with removed callback.
             });
  ```
  ```java
-  ((RemovableView) view).setAutoRemoveMultiplier(0.3f);//移出屏幕超过30%松开后自动移除
+  ((RemovableView) view).setAutoRemoveMultiplier(0.3f);//if moved distance more than 30% width of the view,it will remove automatically.
   ```
