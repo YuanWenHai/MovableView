@@ -15,5 +15,6 @@ A movable view with removed callback.
             });
  ```
  ```java
-  ((RemovableView) view).setAutoRemoveMultiplier(0.3f);//if moved distance more than 30% width of the view,it will remove automatically.
+ //if moved distance more than 30% width of the view,it will remove automatically.
+  ((RemovableView) view).setAutoRemoveMultiplier(0.3f);
   ```
