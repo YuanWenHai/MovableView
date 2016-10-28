@@ -18,3 +18,19 @@ A movable view with removed callback.
  //if moved distance more than 30% width of the view,it will remove automatically.
   ((RemovableView) view).setAutoRemoveMultiplier(0.3f);
   ```
+# Dependency
+Add it in your root build.gradle at the end of repositories:
+```
+allprojects {
+		repositories {
+			...
+			maven { url "https://jitpack.io" }
+		}
+	}
+  ```
+  Add the dependency:
+  ```
+  dependencies {
+	        compile 'com.github.YuanWenHai:MovableView:1.4'
+	}
+  ```
