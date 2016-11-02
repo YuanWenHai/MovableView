@@ -96,8 +96,8 @@ public class RemovableView extends LinearLayout {
             case MotionEvent.ACTION_MOVE:
                 float absX = Math.abs(event.getX()-lastX);
                 movedXDistance += absX;
-                //因为重写了onTouchEvent，所以整个layout的onClick将变得不可用，故主动performClick
-                //若接受到移动手势，则取消Click的执行
+                //因为重写了onTouchEvent，所以整个layout的onClick将变得混乱，故做一些控制
+                //若接受到移动手势，则取消super.onTouchEvent的执行(父类的onTouchEvent将执行onCLick等事件)
                 if(!moved && movedXDistance > touchSlop){
                     moved = true;
                 }
@@ -111,11 +111,11 @@ public class RemovableView extends LinearLayout {
                 break;
             case MotionEvent.ACTION_UP:
                 getParent().requestDisallowInterceptTouchEvent(false);
-                if(!moved){
-                    performClick();
-                }
                 break;
         }
+            if(!moved){
+                super.onTouchEvent(event);
+            }
             mDragger.processTouchEvent(event);
             return true;
     }

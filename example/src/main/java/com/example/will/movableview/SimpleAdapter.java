@@ -65,6 +65,13 @@ public class SimpleAdapter extends RecyclerView.Adapter<SimpleAdapter.ViewHolder
                     Toast.makeText(mRecyclerView.getContext(),"you clicked "+list.get(getAdapterPosition()),Toast.LENGTH_SHORT).show();
                 }
             });
+            view.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    Toast.makeText(mRecyclerView.getContext(),"you  long clicked "+list.get(getAdapterPosition()),Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+            });
             text = (TextView) view.findViewById(R.id.text);
             ((RemovableView) view).setAutoRemoveMultiplier(0.3f);
         }
