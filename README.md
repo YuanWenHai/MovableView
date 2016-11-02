@@ -31,6 +31,6 @@ allprojects {
   Add the dependency:
   ```
   dependencies {
-	        compile 'com.github.YuanWenHai:MovableView:1.5'
+	        compile 'com.github.YuanWenHai:MovableView:1.7'
 	}
   ```
