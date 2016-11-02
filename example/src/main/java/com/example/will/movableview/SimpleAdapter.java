@@ -49,6 +49,7 @@ public class SimpleAdapter extends RecyclerView.Adapter<SimpleAdapter.ViewHolder
         TextView text;
         public ViewHolder(View view){
             super(view);
+            //((RemovableView) view).disallowMove(true);
             ((RemovableView) view).setOnRemoveCallback(new RemovableView.OnRemoveCallback() {
                 @Override
                 public void onRemove(View view) {
@@ -65,6 +66,7 @@ public class SimpleAdapter extends RecyclerView.Adapter<SimpleAdapter.ViewHolder
                 }
             });
             text = (TextView) view.findViewById(R.id.text);
+            ((RemovableView) view).setAutoRemoveMultiplier(0.3f);
         }
     }
     private void animateView(final View view, final int position){

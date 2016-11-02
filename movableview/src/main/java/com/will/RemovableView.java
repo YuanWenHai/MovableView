@@ -32,6 +32,8 @@ public class RemovableView extends LinearLayout {
 
     private float lastX;
 
+    private boolean disallowMove;
+
 
     private float touchSlop = ViewConfiguration.get(getContext()).getScaledTouchSlop();
 
@@ -47,7 +49,10 @@ public class RemovableView extends LinearLayout {
 
             @Override
             public int clampViewPositionHorizontal(View child, int left, int dx) {
-                return left;
+                if(!disallowMove){
+                    return left;
+                }
+                return 0;
             }
 
             @Override
@@ -97,7 +102,7 @@ public class RemovableView extends LinearLayout {
                     moved = true;
                 }
                 //为横向滑动判定增加了touch slop的距离补差,提高操作体验
-                if(movedXDistance >touchSlop){
+                if(movedXDistance >touchSlop && !disallowMove){
                     getParent().requestDisallowInterceptTouchEvent(true);
                 }else{
                     //当横向滑动距离少于touchSlop时，放弃
@@ -140,6 +145,9 @@ public class RemovableView extends LinearLayout {
 
         originX = mContentView.getLeft();
         originY = mContentView.getTop();
+    }
+    public void disallowMove(boolean which){
+        disallowMove = which;
     }
 
     @Override
