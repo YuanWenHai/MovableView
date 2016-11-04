@@ -115,6 +115,8 @@ public class RemovableView extends LinearLayout {
         }
             if(!moved){
                 super.onTouchEvent(event);
+            }else{
+                cancelLongPress();
             }
             mDragger.processTouchEvent(event);
             return true;
